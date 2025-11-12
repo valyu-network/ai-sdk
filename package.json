@@ -1,0 +1,58 @@
+{
+  "name": "@valyu/ai-sdk",
+  "version": "1.0.0",
+  "description": "Valyu search tools for Vercel AI SDK",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "node tests/integration-test.js",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "valyu",
+    "search",
+    "ai-sdk",
+    "vercel",
+    "web-search",
+    "finance",
+    "research",
+    "biomedical",
+    "patents",
+    "sec-filings",
+    "ai",
+    "tools"
+  ],
+  "author": "Valyu",
+  "license": "MIT",
+  "homepage": "https://valyu.ai",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/valyu/valyu-ai-sdk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/valyu/valyu-ai-sdk/issues"
+  },
+  "peerDependencies": {
+    "@ai-sdk/openai": "^2.0.65",
+    "ai": "^5.0.83"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "zod": "^3.22.0"
+  },
+  "devDependencies": {
+    "@ai-sdk/openai": "^2.0.65",
+    "@types/node": "^20.0.0",
+    "ai": "^5.0.83",
+    "typescript": "^5.0.0"
+  }
+}
