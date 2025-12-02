@@ -19,7 +19,7 @@ async function main() {
     tools: {
       companyResearch: companyResearch(),
     },
-    stopWhen: stepCountIs(3),
+    stopWhen: stepCountIs(5),
   });
 
   for await (const chunk of result.fullStream) {

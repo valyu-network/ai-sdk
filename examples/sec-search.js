@@ -19,7 +19,7 @@ async function main() {
     tools: {
       secSearch: secSearch({ maxNumResults: 2 }),
     },
-    stopWhen: stepCountIs(3),
+    stopWhen: stepCountIs(10),
   });
 
   for await (const chunk of result.fullStream) {

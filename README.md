@@ -86,14 +86,17 @@ That's it! The package reads it automatically.
 Search the web for current information, news, articles, and general content.
 
 ```typescript
+import { generateText, stepCountIs } from "ai";
 import { webSearch } from "@valyu/ai-sdk";
+import { openai } from "@ai-sdk/openai";
 
 const { text } = await generateText({
   model: openai('gpt-5'),
   prompt: 'What happened in AI tech news last week?',
   tools: {
-    webSearch: webSearch({ maxNumResults: 5 }),
+    webSearch: webSearch(),
   },
+  stopWhen: stepCountIs(3),
 });
 ```
 
@@ -104,14 +107,17 @@ const { text } = await generateText({
 Search financial data including stock prices, market data, earnings reports, and financial metrics.
 
 ```typescript
+import { generateText, stepCountIs } from "ai";
 import { financeSearch } from "@valyu/ai-sdk";
+import { openai } from "@ai-sdk/openai";
 
 const { text } = await generateText({
   model: openai('gpt-5'),
   prompt: 'What are Apple\'s latest earnings?',
   tools: {
-    financeSearch: financeSearch({ maxNumResults: 5 }),
+    financeSearch: financeSearch(),
   },
+  stopWhen: stepCountIs(10),
 });
 ```
 
@@ -122,14 +128,17 @@ const { text } = await generateText({
 Search academic research papers, scholarly articles, and textbooks across all disciplines.
 
 ```typescript
+import { generateText, stepCountIs } from "ai";
 import { paperSearch } from "@valyu/ai-sdk";
+import { openai } from "@ai-sdk/openai";
 
 const { text } = await generateText({
   model: openai('gpt-5'),
   prompt: 'Find recent research on transformer neural networks',
   tools: {
-    paperSearch: paperSearch({ maxNumResults: 5 }),
+    paperSearch: paperSearch(),
   },
+  stopWhen: stepCountIs(10),
 });
 ```
 
@@ -140,14 +149,17 @@ const { text } = await generateText({
 Search biomedical literature including PubMed articles, clinical trials, and FDA drug information.
 
 ```typescript
+import { generateText, stepCountIs } from "ai";
 import { bioSearch } from "@valyu/ai-sdk";
+import { openai } from "@ai-sdk/openai";
 
 const { text } = await generateText({
   model: openai('gpt-5'),
   prompt: 'Find clinical trials for cancer immunotherapy',
   tools: {
-    bioSearch: bioSearch({ maxNumResults: 5 }),
+    bioSearch: bioSearch(),
   },
+  stopWhen: stepCountIs(10),
 });
 ```
 
@@ -158,14 +170,17 @@ const { text } = await generateText({
 Search patent databases for inventions, innovations, and intellectual property.
 
 ```typescript
+import { generateText, stepCountIs } from "ai";
 import { patentSearch } from "@valyu/ai-sdk";
+import { openai } from "@ai-sdk/openai";
 
 const { text } = await generateText({
   model: openai('gpt-5'),
   prompt: 'Find patents related to quantum computing',
   tools: {
-    patentSearch: patentSearch({ maxNumResults: 5 }),
+    patentSearch: patentSearch(),
   },
+  stopWhen: stepCountIs(10),
 });
 ```
 
@@ -176,14 +191,17 @@ const { text } = await generateText({
 Search SEC filings including 10-K, 10-Q, 8-K, and other regulatory documents.
 
 ```typescript
+import { generateText, stepCountIs } from "ai";
 import { secSearch } from "@valyu/ai-sdk";
+import { openai } from "@ai-sdk/openai";
 
 const { text } = await generateText({
   model: openai('gpt-5'),
   prompt: 'Find Tesla\'s latest 10-K filing',
   tools: {
-    secSearch: secSearch({ maxNumResults: 5 }),
+    secSearch: secSearch(),
   },
+  stopWhen: stepCountIs(10),
 });
 ```
 
@@ -194,14 +212,17 @@ const { text } = await generateText({
 Search economic data including labor statistics, Federal Reserve data, World Bank indicators, and US federal spending.
 
 ```typescript
+import { generateText, stepCountIs } from "ai";
 import { economicsSearch } from "@valyu/ai-sdk";
+import { openai } from "@ai-sdk/openai";
 
 const { text } = await generateText({
   model: openai('gpt-5'),
   prompt: 'What is the current US unemployment rate?',
   tools: {
-    economicsSearch: economicsSearch({ maxNumResults: 5 }),
+    economicsSearch: economicsSearch(),
   },
+  stopWhen: stepCountIs(10),
 });
 ```
 
@@ -212,7 +233,9 @@ const { text } = await generateText({
 Generate comprehensive company intelligence reports with business overview, financials, SEC filings, news, insider activity, and citations.
 
 ```typescript
+import { generateText, stepCountIs } from "ai";
 import { companyResearch } from "@valyu/ai-sdk";
+import { openai } from "@ai-sdk/openai";
 
 const { text } = await generateText({
   model: openai('gpt-5'),
@@ -220,6 +243,7 @@ const { text } = await generateText({
   tools: {
     companyResearch: companyResearch(),
   },
+  stopWhen: stepCountIs(5),
 });
 ```
 

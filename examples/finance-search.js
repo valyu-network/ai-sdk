@@ -20,7 +20,7 @@ async function main() {
     tools: {
       financeSearch: financeSearch({ maxNumResults: 3 }),
     },
-    stopWhen: stepCountIs(5),
+    stopWhen: stepCountIs(10),
   });
 
   for await (const chunk of result.fullStream) {

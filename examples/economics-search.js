@@ -19,7 +19,7 @@ async function main() {
     tools: {
       economicsSearch: economicsSearch({ maxNumResults: 3 }),
     },
-    stopWhen: stepCountIs(3),
+    stopWhen: stepCountIs(10),
   });
 
   for await (const chunk of result.fullStream) {
