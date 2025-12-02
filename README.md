@@ -1,6 +1,6 @@
-# Valyu AI SDK
+# @valyu/ai-sdk
 
-Give your AI agents access to real-time web data and specialized knowledge with Valyu's DeepSearch API. Add powerful search capabilities to your LLMs in just a few lines of code. Works seamlessly with AI SDK by Vercel.
+AI SDK tools for Valyu search API, built for Vercel AI SDK v5.
 
 ## Installation
 

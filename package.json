@@ -1,6 +1,6 @@
 {
   "name": "@valyu/ai-sdk",
-  "version": "1.0.2",
+  "version": "1.0.1",
   "description": "Valyu search tools for Vercel AI SDK",
   "files": [
     "dist"
