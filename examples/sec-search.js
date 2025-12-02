@@ -8,7 +8,7 @@ dotenv.config({ path: ".env.local" });
 async function main() {
   console.log("📋 SEC Filings Search Example\n");
 
-  const prompt = "Summarize Tesla's most recent 10-K filing";
+  const prompt = "Summarise MD&A section of Tesla's latest 10-k filling";
   console.log("📝 Prompt:", prompt);
   console.log("\n");
 
@@ -17,7 +17,7 @@ async function main() {
     system: "You are a helpful assistant. Make ONE search with a concise query, then provide a detailed answer based on the search results.",
     messages: [{ role: "user", content: prompt }],
     tools: {
-      secSearch: secSearch({ maxNumResults: 2 }),
+      secSearch: secSearch(),
     },
     stopWhen: stepCountIs(10),
   });

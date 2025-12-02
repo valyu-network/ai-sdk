@@ -33,9 +33,9 @@ export function webSearch(config: ValyuWebSearchConfig = {}) {
   } = config;
 
   return tool({
-    description: "Search the web for current information, news, articles, and content. Use this when you need up-to-date information or facts from the internet. Performs real-time web searches across diverse sources.",
+    description: "Search the web for current information, news, and articles. The API handles natural language - use simple, clear queries.",
     inputSchema: z.object({
-      query: z.string().min(1).max(500).describe("The web search query - be specific and clear about what you're looking for"),
+      query: z.string().min(1).max(500).describe("Natural language query (e.g., 'latest AI developments', 'Tesla Q4 2024 earnings')"),
       includedSources: z.array(z.string()).optional().describe("Restrict search to specific domains or sources (e.g., ['nature.com', 'arxiv.org']). Cannot be used with excludedSources."),
       excludedSources: z.array(z.string()).optional().describe("Exclude specific domains or sources from results (e.g., ['reddit.com', 'quora.com']). Cannot be used with includedSources."),
     }),

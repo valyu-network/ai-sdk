@@ -8,7 +8,7 @@ dotenv.config({ path: ".env.local" });
 async function main() {
   console.log("🧬 Biomedical Search Example\n");
 
-  const prompt = "What are the latest treatments for Type 2 diabetes?";
+  const prompt = "Summarise top completed Phase 3 metastatic melanoma trial comparing nivolumab+ipilimumab vs monotherapy";
   console.log("📝 Prompt:", prompt);
   console.log("\n");
 
@@ -17,7 +17,7 @@ async function main() {
     system: "You are a helpful assistant. Make ONE search with a concise query, then provide a detailed answer based on the search results.",
     messages: [{ role: "user", content: prompt }],
     tools: {
-      bioSearch: bioSearch({ maxNumResults: 3 }),
+      bioSearch: bioSearch(),
     },
     stopWhen: stepCountIs(10),
   });

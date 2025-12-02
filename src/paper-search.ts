@@ -38,9 +38,9 @@ export function paperSearch(config: ValyuPaperSearchConfig = {}) {
   } = config;
 
   return tool({
-    description: "Search academic research papers, scholarly articles, journals, and textbooks. Use this when you need scientific literature, research findings, or academic content across all disciplines.",
+    description: "Search academic papers from arXiv, PubMed, bioRxiv, and medRxiv. The API handles semantic search - use simple natural language, not keyword stuffing.",
     inputSchema: z.object({
-      query: z.string().min(1).max(500).describe("The research paper search query - be specific about the topic, field, or methodology you're looking for"),
+      query: z.string().min(1).max(500).describe("Natural language query (e.g., 'psilocybin effects on lifespan in mice', 'CRISPR cancer therapy trials')"),
     }),
     execute: async ({ query }) => {
       if (!apiKey) {

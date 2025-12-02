@@ -33,9 +33,9 @@ export function patentSearch(config: ValyuPatentSearchConfig = {}) {
   } = config;
 
   return tool({
-    description: "Search patent databases for inventions, innovations, and intellectual property. Use this when you need information about patents, patent applications, or prior art across technology, pharmaceutical, and other fields.",
+    description: "Search patent databases for inventions and intellectual property. The API handles natural language - no need for patent numbers or classification codes.",
     inputSchema: z.object({
-      query: z.string().min(1).max(500).describe("The patent search query - be specific about the technology, invention, or patent number you're looking for"),
+      query: z.string().min(1).max(500).describe("Natural language query (e.g., 'solid-state battery patents', 'CRISPR gene editing methods')"),
     }),
     execute: async ({ query }) => {
       if (!apiKey) {

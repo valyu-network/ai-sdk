@@ -39,9 +39,9 @@ export function economicsSearch(config: ValyuEconomicsSearchConfig = {}) {
   } = config;
 
   return tool({
-    description: "Search economic data and statistics including labor statistics (BLS), Federal Reserve economic data (FRED), World Bank indicators, and US federal spending. Use this for unemployment rates, GDP, inflation, economic indicators, government spending, and macroeconomic data.",
+    description: "Search economic data from BLS, FRED, World Bank. The API handles natural language - no need for series IDs or technical codes.",
     inputSchema: z.object({
-      query: z.string().min(1).max(500).describe("The economics search query - be specific about the economic indicator, country, time period, or statistic you need"),
+      query: z.string().min(1).max(500).describe("Natural language query (e.g., 'CPI vs unemployment since 2020', 'US GDP growth last 5 years')"),
     }),
     execute: async ({ query }) => {
       if (!apiKey) {

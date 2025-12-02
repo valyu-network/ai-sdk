@@ -8,7 +8,7 @@ dotenv.config({ path: ".env.local" });
 async function main() {
   console.log("📚 Research Paper Search Example\n");
 
-  const prompt = "Find recent research papers on transformer architectures in machine learning";
+  const prompt = "Psilocybin effects on cellular lifespan and longevity in mice?";
   console.log("📝 Prompt:", prompt);
   console.log("\n");
 
@@ -17,7 +17,7 @@ async function main() {
     system: "You are a helpful assistant. Make ONE search with a concise query, then provide a detailed answer based on the search results.",
     messages: [{ role: "user", content: prompt }],
     tools: {
-      paperSearch: paperSearch({ maxNumResults: 3 }),
+      paperSearch: paperSearch(),
     },
     stopWhen: stepCountIs(10),
   });

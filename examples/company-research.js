@@ -8,7 +8,7 @@ dotenv.config({ path: ".env.local" });
 async function main() {
   console.log("🏢 Company Research Example\n");
 
-  const prompt = "Research Apple Inc and provide a comprehensive report";
+  const prompt = "Research the company nia AI";
   console.log("📝 Prompt:", prompt);
   console.log("\n");
 

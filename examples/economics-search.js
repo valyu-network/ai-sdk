@@ -8,7 +8,7 @@ dotenv.config({ path: ".env.local" });
 async function main() {
   console.log("📊 Economics Search Example\n");
 
-  const prompt = "What is the current US unemployment rate and recent trends?";
+  const prompt = "What is CPI vs unemployment since 2020 in the US?";
   console.log("📝 Prompt:", prompt);
   console.log("\n");
 
@@ -17,7 +17,7 @@ async function main() {
     system: "You are a helpful assistant. Make ONE search with a concise query, then provide a detailed answer based on the search results.",
     messages: [{ role: "user", content: prompt }],
     tools: {
-      economicsSearch: economicsSearch({ maxNumResults: 3 }),
+      economicsSearch: economicsSearch(),
     },
     stopWhen: stepCountIs(10),
   });

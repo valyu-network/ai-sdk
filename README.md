@@ -22,7 +22,7 @@ import { openai } from "@ai-sdk/openai";
 
 const { text } = await generateText({
   model: openai('gpt-5'),
-  prompt: 'Latest data center projects for AI inference workloads',
+  prompt: 'Latest data center projects for AI inference workloads?',
   tools: {
     webSearch: webSearch(),
   },
@@ -35,15 +35,15 @@ console.log(text);
 
 ## Need Specialized Search?
 
-Beyond general web search, Valyu provides domain-specific tools for specialized research:
+Beyond general web search, Valyu provides domain-specific tools for specialized research where you can plug directly into:
 
-- **financeSearch** - Stock prices, earnings, market data
-- **paperSearch** - Academic papers, arXiv, scholarly articles
-- **bioSearch** - Medical research, clinical trials, PubMed
-- **patentSearch** - Patent databases, prior art, inventions
-- **secSearch** - SEC filings, 10-K, 10-Q, regulatory documents
-- **economicsSearch** - BLS, FRED, World Bank economic indicators
-- **companyResearch** - Comprehensive company intelligence reports
+- **financeSearch** - Stock prices, earnings, insider transactions, dividends, balance sheets, income statements, and more
+- **paperSearch** - Full-text search of PubMed, arXiv, bioRxiv, medRxiv, and other scholarly articles
+- **bioSearch** - Clinical trials, FDA drug labels, peer-reviewed biomedical research, PubMed, medRxiv, bioRxiv
+- **patentSearch** - USPTO full-text patent search and related intellectual property
+- **secSearch** - SEC filings including 10-K, 10-Q, 8-K, and regulatory disclosures
+- **economicsSearch** - Economic indicators from BLS, FRED, World Bank, USAspending, and more
+- **companyResearch** - Comprehensive company research and intelligence reports
 
 Or **create your own** custom search tool using the same API!
 
@@ -92,7 +92,7 @@ import { openai } from "@ai-sdk/openai";
 
 const { text } = await generateText({
   model: openai('gpt-5'),
-  prompt: 'What happened in AI tech news last week?',
+  prompt: 'Latest data center projects for AI inference workloads?',
   tools: {
     webSearch: webSearch(),
   },
@@ -113,7 +113,7 @@ import { openai } from "@ai-sdk/openai";
 
 const { text } = await generateText({
   model: openai('gpt-5'),
-  prompt: 'What are Apple\'s latest earnings?',
+  prompt: 'What was the stock price of Apple from the beginning of 2020 to 14th feb?',
   tools: {
     financeSearch: financeSearch(),
   },
@@ -134,7 +134,7 @@ import { openai } from "@ai-sdk/openai";
 
 const { text } = await generateText({
   model: openai('gpt-5'),
-  prompt: 'Find recent research on transformer neural networks',
+  prompt: 'Psilocybin effects on cellular lifespan and longevity in mice?',
   tools: {
     paperSearch: paperSearch(),
   },
@@ -155,7 +155,7 @@ import { openai } from "@ai-sdk/openai";
 
 const { text } = await generateText({
   model: openai('gpt-5'),
-  prompt: 'Find clinical trials for cancer immunotherapy',
+  prompt: 'Summarise top completed Phase 3 metastatic melanoma trial comparing nivolumab+ipilimumab vs monotherapy',
   tools: {
     bioSearch: bioSearch(),
   },
@@ -176,9 +176,9 @@ import { openai } from "@ai-sdk/openai";
 
 const { text } = await generateText({
   model: openai('gpt-5'),
-  prompt: 'Find patents related to quantum computing',
+  prompt: 'Find patents published in 2025 for high energy laser weapon systems',
   tools: {
-    patentSearch: patentSearch(),
+    patentSearch: patentSearch({ maxNumResults: 2 }),
   },
   stopWhen: stepCountIs(10),
 });
@@ -197,7 +197,7 @@ import { openai } from "@ai-sdk/openai";
 
 const { text } = await generateText({
   model: openai('gpt-5'),
-  prompt: 'Find Tesla\'s latest 10-K filing',
+  prompt: 'Summarise MD&A section of Tesla\'s latest 10-k filling',
   tools: {
     secSearch: secSearch(),
   },
@@ -218,7 +218,7 @@ import { openai } from "@ai-sdk/openai";
 
 const { text } = await generateText({
   model: openai('gpt-5'),
-  prompt: 'What is the current US unemployment rate?',
+  prompt: 'What is CPI vs unemployment since 2020 in the US?',
   tools: {
     economicsSearch: economicsSearch(),
   },
@@ -239,7 +239,7 @@ import { openai } from "@ai-sdk/openai";
 
 const { text } = await generateText({
   model: openai('gpt-5'),
-  prompt: 'Research Apple Inc',
+  prompt: 'Research the company nia AI',
   tools: {
     companyResearch: companyResearch(),
   },
@@ -249,7 +249,7 @@ const { text } = await generateText({
 
 **Best for**: In-depth company research, due diligence, competitive intelligence, investment research. Automatically gathers data in parallel from multiple sources and synthesizes into a structured markdown report. Supports optional section filtering (summary, leadership, products, funding, competitors, filings, financials, news, insiders).
 
-**Note**: This tool uses the Valyu Answer API which provides AI-synthesized responses with citations. Costs are controlled via the `dataMaxPrice` parameter (default: $1.00 per section).
+**Note**: This tool automatically detects whether the company is public or private. For public companies, it returns information from SEC filings, financial statements, and other disclosures. For private companies, it pulls available data from news, funding, and other public sources.
 
 ## Create Your Own Tool
 
@@ -283,6 +283,9 @@ export function myCustomSearch(config = {}) {
         }),
       });
 
+
+      // Optionally filter api response
+
       const data = await response.json();
       return data;
     },
@@ -292,138 +295,6 @@ export function myCustomSearch(config = {}) {
 
 Check out the [Valyu API Documentation](https://docs.valyu.ai) for all available parameters and data sources.
 
-## Configuration Options
-
-All tools support these configuration options:
-
-```typescript
-{
-  // API key (defaults to process.env.VALYU_API_KEY)
-  apiKey?: string;
-
-  // Search type: "proprietary" (premium sources) or "web" (default: "proprietary")
-  searchType?: "proprietary" | "web";
-
-  // Maximum number of results (default: 10)
-  maxNumResults?: number;
-
-  // Maximum price per query in CPM (cost per thousand retrievals)
-  maxPrice?: number;
-
-  // Relevance threshold (0-1) to filter results by quality
-  relevanceThreshold?: number;
-
-  // Category to focus the search on
-  category?: string;
-
-  // Specific sources to include (dataset identifiers)
-  includedSources?: string[];
-
-  // Flag for agentic integration (default: true)
-  isToolCall?: boolean;
-}
-```
-
-## Examples
-
-### Multi-Tool Search
-
-Combine multiple search tools for comprehensive research:
-
-```typescript
-import { generateText } from "ai";
-import { paperSearch, bioSearch, financeSearch } from "@valyu/ai-sdk";
-import { openai } from "@ai-sdk/openai";
-
-const { text } = await generateText({
-  model: openai('gpt-5'),
-  prompt: 'Research the commercialization of CRISPR technology',
-  tools: {
-    papers: paperSearch({ maxNumResults: 3 }),
-    medical: bioSearch({ maxNumResults: 3 }),
-    finance: financeSearch({ maxNumResults: 3 }),
-  },
-});
-```
-
-### Custom Configuration
-
-Use advanced options to fine-tune your searches:
-
-```typescript
-import { webSearch } from "@valyu/ai-sdk";
-
-const { text } = await generateText({
-  model: openai('gpt-5'),
-  prompt: 'Find high-quality analysis of the latest AI trends',
-  tools: {
-    webSearch: webSearch({
-      maxNumResults: 10,
-      searchType: "proprietary",
-      relevanceThreshold: 0.8,  // High relevance only
-      maxPrice: 0.01,            // Cost control
-    }),
-  },
-});
-```
-
-### Streaming Results
-
-Use with `streamText` for real-time responses:
-
-```typescript
-import { streamText } from "ai";
-import { paperSearch } from "@valyu/ai-sdk";
-import { anthropic } from "@ai-sdk/anthropic";
-
-const result = streamText({
-  model: anthropic('claude-3-5-sonnet-20241022'),
-  prompt: 'Summarize recent quantum computing research',
-  tools: {
-    papers: paperSearch(),
-  },
-});
-
-for await (const chunk of result.textStream) {
-  process.stdout.write(chunk);
-}
-```
-
-## TypeScript Support
-
-Full TypeScript types included:
-
-```typescript
-import {
-  webSearch,
-  ValyuWebSearchConfig,
-  ValyuSearchResult,
-  ValyuApiResponse
-} from "@valyu/ai-sdk";
-
-const config: ValyuWebSearchConfig = {
-  maxNumResults: 10,
-  searchType: "proprietary",
-  relevanceThreshold: 0.7,
-};
-
-const search = webSearch(config);
-```
-
-### Available Types
-
-- `ValyuBaseConfig` - Base configuration for all tools
-- `ValyuWebSearchConfig` - Web search configuration
-- `ValyuFinanceSearchConfig` - Finance search configuration
-- `ValyuPaperSearchConfig` - Research paper search configuration
-- `ValyuBioSearchConfig` - Biomedical search configuration
-- `ValyuPatentSearchConfig` - Patent search configuration
-- `ValyuSecSearchConfig` - SEC filings search configuration
-- `ValyuEconomicsSearchConfig` - Economics search configuration
-- `ValyuCompanyResearchConfig` - Company research configuration
-- `ValyuSearchResult` - Individual search result
-- `ValyuApiResponse` - API response structure
-
 ## Links
 
 - [Valyu Platform](https://platform.valyu.ai) - Get your API keys
@@ -431,32 +302,10 @@ const search = webSearch(config);
 - [Valyu Website](https://valyu.ai) - Learn more about Valyu
 - [GitHub Repository](https://github.com/valyu/valyu-ai-sdk) - View source code
 
-## Features
-
-- **Multiple Specialized Tools**: Eight domain-specific tools including seven search tools and one comprehensive research tool
-- **Premium Data Sources**: Access to academic papers (arXiv), biomedical research (PubMed), financial data, patents, SEC filings, economic indicators (BLS, FRED, World Bank), and AI-powered company intelligence
-- **Real-time Search**: Get current information from across the web
-- **Flexible Configuration**: Control costs, relevance thresholds, and data sources
-- **Type-Safe**: Full TypeScript support with detailed type definitions
-- **Easy Integration**: Works seamlessly with Vercel AI SDK
-- **Generous Free Tier**: $10 in free credits when you sign up
-
-## Cost Control
-
-Valyu uses a CPM (cost per thousand retrievals) pricing model. Control your costs with:
-
-```typescript
-webSearch({
-  maxPrice: 0.01,              // Maximum cost per query
-  maxNumResults: 5,            // Limit number of results
-  relevanceThreshold: 0.8,     // Only high-quality results
-})
-```
-
 ## License
 
 MIT
 
 ---
 
-Built with Valyu DeepSearch API - Powering AI agents with comprehensive search capabilities.
+Built with Valyu's API - Powering AI agents with state-of-the-art search capabilities.

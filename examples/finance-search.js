@@ -9,7 +9,7 @@ dotenv.config({ path: ".env.local" });
 async function main() {
   console.log("💰 Finance Search Example\n");
 
-  const prompt = "What is the current stock price and recent performance of Apple (AAPL)?";
+  const prompt = "What was the stock price of Apple from the beginning of 2020 to 14th feb?";
   console.log("📝 Prompt:", prompt);
   console.log("\n");
 
@@ -18,7 +18,7 @@ async function main() {
     system: "You are a helpful assistant. Make ONE search with a concise query, then provide a detailed answer based on the search results.",
     messages: [{ role: "user", content: prompt }],
     tools: {
-      financeSearch: financeSearch({ maxNumResults: 3 }),
+      financeSearch: financeSearch(),
     },
     stopWhen: stepCountIs(10),
   });

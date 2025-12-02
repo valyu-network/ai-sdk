@@ -39,9 +39,9 @@ export function bioSearch(config: ValyuBioSearchConfig = {}) {
   } = config;
 
   return tool({
-    description: "Search biomedical and medical literature including peer-reviewed research, clinical trials, drug information, and FDA labels. Use this for medical research, disease information, treatments, or drug data.",
+    description: "Search biomedical literature from PubMed, clinical trials, and FDA drug labels. The API handles natural language - use simple queries.",
     inputSchema: z.object({
-      query: z.string().min(1).max(500).describe("The biomedical search query - be specific about the disease, treatment, drug, or medical topic you're researching"),
+      query: z.string().min(1).max(500).describe("Natural language query (e.g., 'GLP-1 agonists for weight loss', 'Phase 3 melanoma immunotherapy trials')"),
     }),
     execute: async ({ query }) => {
       if (!apiKey) {

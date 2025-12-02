@@ -48,9 +48,9 @@ export function financeSearch(config: ValyuFinanceSearchConfig = {}) {
   } = config;
 
   return tool({
-    description: "Search financial data including stock prices, market data, financial reports, earnings, balance sheets, income statements, cash flows, dividends, insider transactions, crypto, forex, and economic indicators. Use this when you need financial information, company data, or market analysis.",
+    description: "Search financial data: stock prices, earnings, balance sheets, income statements, cash flows, SEC filings, dividends, insider transactions, crypto, forex, and economic indicators. The API handles natural language - ask your full question in one query per topic.",
     inputSchema: z.object({
-      query: z.string().min(1).max(500).describe("The finance search query - be specific about companies, metrics, or financial data you need"),
+      query: z.string().min(1).max(500).describe("Natural language query (e.g., 'Apple stock price Q1-Q3 2020', 'Tesla revenue last 4 quarters')"),
     }),
     execute: async ({ query }) => {
       if (!apiKey) {

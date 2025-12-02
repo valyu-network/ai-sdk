@@ -8,7 +8,7 @@ dotenv.config({ path: ".env.local" });
 async function main() {
   console.log("⚖️ Patent Search Example\n");
 
-  const prompt = "Find patents related to electric vehicle battery technology";
+  const prompt = "Find patents published in 2025 for high energy laser weapon systems";
   console.log("📝 Prompt:", prompt);
   console.log("\n");
 
@@ -17,7 +17,7 @@ async function main() {
     system: "You are a helpful assistant. Make ONE search with a concise query, then provide a detailed answer based on the search results.",
     messages: [{ role: "user", content: prompt }],
     tools: {
-      patentSearch: patentSearch({ maxNumResults: 3 }),
+      patentSearch: patentSearch({ maxNumResults: 2 }),
     },
     stopWhen: stepCountIs(10),
   });

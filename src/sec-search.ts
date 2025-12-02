@@ -33,9 +33,9 @@ export function secSearch(config: ValyuSecSearchConfig = {}) {
   } = config;
 
   return tool({
-    description: "Search SEC filings including 10-K annual reports, 10-Q quarterly reports, 8-K current reports, proxy statements, and other regulatory filings. Use this when you need official company disclosures, financial statements, or regulatory information.",
+    description: "Search SEC filings (10-K, 10-Q, 8-K, proxy statements). Use simple natural language with company name and filing type - no accession numbers or technical syntax needed.",
     inputSchema: z.object({
-      query: z.string().min(1).max(500).describe("The SEC filings search query - be specific about the company, filing type (10-K, 10-Q, 8-K, etc.), or information you need"),
+      query: z.string().min(1).max(500).describe("Natural language query (e.g., 'Tesla 10-K risk factors', 'Apple executive compensation 2024')"),
     }),
     execute: async ({ query }) => {
       if (!apiKey) {
