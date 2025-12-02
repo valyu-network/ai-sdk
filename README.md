@@ -13,13 +13,16 @@ npm install @valyu/ai-sdk
 Get started with web search in seconds:
 
 ```typescript
-import { generateText } from "ai";
-import { webSearch } from "@valyu/ai-sdk";
+
+
+import { webSearch } from "@valyu/ai-sdk"; 
 import { openai } from "@ai-sdk/openai";
+// Available specialised search tools: financeSearch, paperSearch, 
+// bioSearch, patentSearch, secSearch, economicsSearch, companyResearch
 
 const { text } = await generateText({
   model: openai('gpt-5'),
-  prompt: 'What are the latest developments in AI?',
+  prompt: 'Latest data center projects for AI inference workloads',
   tools: {
     webSearch: webSearch(),
   },

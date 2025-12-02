@@ -36,8 +36,10 @@ export function webSearch(config: ValyuWebSearchConfig = {}) {
     description: "Search the web for current information, news, articles, and content. Use this when you need up-to-date information or facts from the internet. Performs real-time web searches across diverse sources.",
     inputSchema: z.object({
       query: z.string().min(1).max(500).describe("The web search query - be specific and clear about what you're looking for"),
+      includedSources: z.array(z.string()).optional().describe("Restrict search to specific domains or sources (e.g., ['nature.com', 'arxiv.org']). Cannot be used with excludedSources."),
+      excludedSources: z.array(z.string()).optional().describe("Exclude specific domains or sources from results (e.g., ['reddit.com', 'quora.com']). Cannot be used with includedSources."),
     }),
-    execute: async ({ query }) => {
+    execute: async ({ query, includedSources, excludedSources }) => {
       if (!apiKey) {
         throw new Error("VALYU_API_KEY is required. Set it in environment variables or pass it in config.");
       }
@@ -59,8 +61,14 @@ export function webSearch(config: ValyuWebSearchConfig = {}) {
       if (otherOptions.category) {
         requestBody.category = otherOptions.category;
       }
-      if (otherOptions.includedSources && otherOptions.includedSources.length > 0) {
+      // Priority: input params > config options
+      if (includedSources && includedSources.length > 0) {
+        requestBody.included_sources = includedSources;
+      } else if (otherOptions.includedSources && otherOptions.includedSources.length > 0) {
         requestBody.included_sources = otherOptions.includedSources;
+      }
+      if (excludedSources && excludedSources.length > 0) {
+        requestBody.excluded_sources = excludedSources;
       }
 
       // Call Valyu API
