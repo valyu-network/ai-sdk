@@ -35,7 +35,7 @@ export function secSearch(config: ValyuSecSearchConfig = {}) {
   return tool({
     description: "Search SEC filings (10-K, 10-Q, 8-K, 13F-HR, Schedule 13D, Schedule 13G) and insider transactions (Form 4 structured data). Covers annual/quarterly reports, institutional holdings (13F), beneficial ownership disclosures (13D/13G), and insider trades. Use simple natural language with company name and filing type - no accession numbers or technical syntax needed.",
     inputSchema: z.object({
-      query: z.string().min(1).max(500).describe("Natural language query (e.g., 'Tesla 10-K FY2024 risk factors', 'Berkshire Hathaway 13F holdings', 'Schedule 13D activist stake in Marcus Corp', 'insider transactions for Pfizer during 2020')"),
+      query: z.string().min(1).max(500).describe("Natural language query (e.g., 'Tesla 10-K FY2024 risk factors', 'Apple iPhone sales 2021', 'Berkshire Hathaway 13F holdings', 'Schedule 13D activist stake in Marcus Corp', 'insider transactions for Pfizer during 2020')"),
     }),
     execute: async ({ query }) => {
       if (!apiKey) {
