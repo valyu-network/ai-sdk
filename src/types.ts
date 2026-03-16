@@ -158,7 +158,7 @@ export interface ValyuSecSearchConfig extends ValyuBaseConfig {
   includedSources?: string[];
 
   /**
-   * Category to focus on (e.g., "10-K", "10-Q", "8-K", "proxy")
+   * Category to focus on (e.g., "10-K", "10-Q", "8-K", "13F-HR", "13D", "13G")
    */
   category?: string;
 }
