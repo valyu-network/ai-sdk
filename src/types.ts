@@ -252,6 +252,8 @@ export interface ValyuSearchResult {
   authors?: string[];
   /** Markdown references for citations in the content */
   references?: string;
+  /** Abstract or summary (for academic content) */
+  abstract?: string;
   /** Any additional metadata fields */
   [key: string]: any;
 }
