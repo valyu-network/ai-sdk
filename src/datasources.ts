@@ -1,5 +1,6 @@
 import { tool } from "ai";
 import { z } from "zod";
+import { valyuFetch } from "./http.js";
 
 /**
  * Configuration for datasources tool
@@ -49,18 +50,16 @@ export function datasources(config: ValyuDatasourcesConfig = {}) {
         throw new Error("VALYU_API_KEY is required. Set it in environment variables or pass it in config.");
       }
 
-      // Build URL with optional category parameter
-      let url = "https://api.valyu.ai/v1/datasources";
+      // Build endpoint with optional category parameter
+      let endpoint = "/datasources";
       if (category) {
-        url += `?category=${encodeURIComponent(category)}`;
+        endpoint += `?category=${encodeURIComponent(category)}`;
       }
 
       try {
-        const response = await fetch(url, {
+        const response = await valyuFetch(endpoint, apiKey, {
           method: "GET",
-          headers: {
-            "x-api-key": apiKey,
-          },
+          contentType: false,
         });
 
         if (!response.ok) {
@@ -116,11 +115,9 @@ export function datasourcesCategories(config: ValyuDatasourcesConfig = {}) {
       }
 
       try {
-        const response = await fetch("https://api.valyu.ai/v1/datasources/categories", {
+        const response = await valyuFetch("/datasources/categories", apiKey, {
           method: "GET",
-          headers: {
-            "x-api-key": apiKey,
-          },
+          contentType: false,
         });
 
         if (!response.ok) {

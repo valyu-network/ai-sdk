@@ -1,6 +1,7 @@
 import { tool } from "ai";
 import { z } from "zod";
 import type { ValyuPaperSearchConfig } from "./types.js";
+import { valyuFetch } from "./http.js";
 
 /**
  * Creates a research paper search tool powered by Valyu for use with Vercel AI SDK v5 and v6
@@ -71,12 +72,7 @@ export function paperSearch(config: ValyuPaperSearchConfig = {}) {
 
       // Call Valyu API
       try {
-        const response = await fetch("https://api.valyu.ai/v1/deepsearch", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "x-api-key": apiKey,
-          },
+        const response = await valyuFetch("/deepsearch", apiKey, {
           body: JSON.stringify(requestBody),
         });
 

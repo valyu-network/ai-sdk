@@ -1,6 +1,7 @@
 import { tool } from "ai";
 import { z } from "zod";
 import type { ValyuSecSearchConfig } from "./types.js";
+import { valyuFetch } from "./http.js";
 
 /**
  * Creates an SEC filings search tool powered by Valyu for use with Vercel AI SDK
@@ -66,12 +67,7 @@ export function secSearch(config: ValyuSecSearchConfig = {}) {
 
       // Call Valyu API
       try {
-        const response = await fetch("https://api.valyu.ai/v1/deepsearch", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "x-api-key": apiKey,
-          },
+        const response = await valyuFetch("/deepsearch", apiKey, {
           body: JSON.stringify(requestBody),
         });
 
