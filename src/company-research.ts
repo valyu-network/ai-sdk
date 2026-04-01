@@ -1,6 +1,7 @@
 import { tool } from "ai";
 import { z } from "zod";
 import type { ValyuCompanyResearchConfig } from "./types.js";
+import { valyuFetch } from "./http.js";
 
 /**
  * Creates a company research tool powered by Valyu for use with Vercel AI SDK
@@ -57,8 +58,6 @@ export function companyResearch(config: ValyuCompanyResearchConfig = {}) {
         throw new Error("VALYU_API_KEY is required. Set it in environment variables or pass it in config.");
       }
 
-      const VALYU_API_BASE = "https://api.valyu.ai/v1";
-
       // Helper to check if response has insufficient information
       const hasInsufficientInfo = (content: string) => {
         if (!content) return true;
@@ -91,12 +90,7 @@ export function companyResearch(config: ValyuCompanyResearchConfig = {}) {
           ...options,
         };
 
-        const response = await fetch(`${VALYU_API_BASE}/answer`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "x-api-key": apiKey,
-          },
+        const response = await valyuFetch("/answer", apiKey, {
           body: JSON.stringify(payload),
         });
 
